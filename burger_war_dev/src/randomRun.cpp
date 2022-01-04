@@ -1,6 +1,6 @@
 // burger war c++ example
 // respect from https://demura.net/lecture/13932.html
-
+//docker内で書いたコメント
 
 #include "ros/ros.h"  // rosで必要はヘッダーファイル
 #include <geometry_msgs/Twist.h> // ロボットを動かすために必要
