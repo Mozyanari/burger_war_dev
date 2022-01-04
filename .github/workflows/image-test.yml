@@ -23,7 +23,7 @@ on:
 env:
   DOCKER_BUILDKIT: 1
   #RESISTRY_URL: ghcr.io/${{ github.repository_owner }}
-  RESISTRY_URL: ghcr.io/mozynari
+  RESISTRY_URL: ghcr.io/Mozyanari
   IMAGE_NAME_CORE: burger-war-core
   IMAGE_NAME_SIM: burger-war-sim
   IMAGE_NAME_ROBO: burger-war-robo
