@@ -149,4 +149,4 @@ $RECYCLE.BIN/
 *.lnk
 
 # Nvidea Driverは個人によって異なるため、Dockrファイルの１つを無視する
-./docker/dev/*
+docker/dev/
