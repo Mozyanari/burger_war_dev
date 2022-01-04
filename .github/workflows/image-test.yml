@@ -122,9 +122,9 @@ jobs:
           docker logs ${{ env.IMAGE_NAME_CORE }}
 
       #コンテナの中にgif化プログラムをインストール
-      - name: Gif making Program
-        run: |
-          docker run \
+      #- name: Gif making Program
+      #  run: |
+      #    docker run \
 
 
 
