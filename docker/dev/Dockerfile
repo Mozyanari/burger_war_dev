@@ -38,6 +38,8 @@ RUN sudo apt-get update -q && sudo apt-get install -y \
      nvidia-driver-470 \
      && rm -rf /var/lib/apt/lists/*
 
+     
+
 # NVIDIAのドライバをインストールする例 ２) バージョンを指定してインストール
 # 参考：https://gitlab.com/nvidia/container-images/driver/-/blob/master/ubuntu18.04/Dockerfile
 #-------------------------------------------------
