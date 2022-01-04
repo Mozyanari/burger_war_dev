@@ -22,7 +22,8 @@ on:
 # 環境変数の設定
 env:
   DOCKER_BUILDKIT: 1
-  RESISTRY_URL: ghcr.io/${{ github.repository_owner }}
+  #RESISTRY_URL: ghcr.io/${{ github.repository_owner }}
+  RESISTRY_URL: ghcr.io/mozynari
   IMAGE_NAME_CORE: burger-war-core
   IMAGE_NAME_SIM: burger-war-sim
   IMAGE_NAME_ROBO: burger-war-robo
@@ -119,6 +120,13 @@ jobs:
             tail -f /dev/null
           docker ps -a
           docker logs ${{ env.IMAGE_NAME_CORE }}
+
+      #コンテナの中にgif化プログラムをインストール
+      - name: Gif making Program
+        run: |
+          docker run \
+
+
 
       # burger-warのソースリストの確認(コンテナ側)
       - name: Source Package List(Container)
