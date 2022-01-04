@@ -147,3 +147,6 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+# Nvidea Driverは個人によって異なるため、Dockrファイルの１つを無視する
+./docker/dev/*
