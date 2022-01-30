@@ -26,3 +26,6 @@ FROM $KIT_IMAGE:$KIT_VERSION
 #-------------------------------------------------
 # COPY core/myexec /usr/local/bin/myexec
 # RUN chmod +x /usr/local/bin/myexec
+
+#.bashrcに「~/catkin_ws/devel/setup.bash」を読み込ませる
+#CMD ["echo", "source ~/catkin_ws/devel/setup.bash", ">>", "${HOME}/.bashrc"]
