@@ -67,7 +67,7 @@ jobs:
       - name: Checkout Dev Repository
         uses: actions/checkout@v2
         with:
-          repository: Gasuta722/burger_war_dev
+          repository: EndoNrak/burger_war_dev
           path: catkin_ws/src/burger_war_dev
 
       
