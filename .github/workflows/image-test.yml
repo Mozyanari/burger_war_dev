@@ -180,6 +180,40 @@ jobs:
           path: /home/runner/work/burger_war_dev/burger_war_dev/catkin_ws/logs/test_logs.tgz
           retention-days: 90
 
+      # burger-warコンテナ停止&削除
+      - name: Close Docker Container
+        run: |
+          docker stop $(docker ps -q) && docker rm $(docker ps -a -q)
+
+      # burger-warコンテナ起動
+      - name: Launch Docker Container
+        run: |
+          docker run \
+            --name ${{ env.IMAGE_NAME_CORE }} \
+            -d \
+            --privileged \
+            --net host \
+            --mount type=bind,src=${{ env.WORKSPACE_DIR }},dst=/home/developer/catkin_ws \
+            --device /dev/snd \
+            -v /dev/shm \
+            -e DISPLAY=${{ env.DISPLAY }} \
+            -e HOST_USER_ID=$(id -u) \
+            -e HOST_GROUP_ID=$(id -g) \
+            ${{ env.IMAGE_NAME_CORE }} \
+            tail -f /dev/null
+          docker ps -a
+          docker logs ${{ env.IMAGE_NAME_CORE }}
+
+      # burger-warのソースリストの確認(コンテナ側)
+      - name: Source Package List(Container)
+        run: |
+          docker exec -u developer -t ${{ env.IMAGE_NAME_CORE }} bash -l -c "ls -la /home/developer/catkin_ws/src/*"
+        
+      # ロボコンプロジェクトのビルド
+      - name: Build Robot Programs
+        run: |
+          docker exec -u developer -t ${{ env.IMAGE_NAME_CORE }} bash -l -c "catkin build"
+
       # burger-warのテスト(LEVEL 2)
       - name: Test Docker Image LEVEL2
         id: image-test-2
@@ -195,6 +229,40 @@ jobs:
           name: ${{ env.TEST_LOG_ARCHIVE }}_LEVEL2
           path: /home/runner/work/burger_war_dev/burger_war_dev/catkin_ws/logs/test_logs.tgz
           retention-days: 90
+
+      # burger-warコンテナ停止&削除
+      - name: Close Docker Container
+        run: |
+          docker stop $(docker ps -q) && docker rm $(docker ps -a -q)
+
+      # burger-warコンテナ起動
+      - name: Launch Docker Container
+        run: |
+          docker run \
+            --name ${{ env.IMAGE_NAME_CORE }} \
+            -d \
+            --privileged \
+            --net host \
+            --mount type=bind,src=${{ env.WORKSPACE_DIR }},dst=/home/developer/catkin_ws \
+            --device /dev/snd \
+            -v /dev/shm \
+            -e DISPLAY=${{ env.DISPLAY }} \
+            -e HOST_USER_ID=$(id -u) \
+            -e HOST_GROUP_ID=$(id -g) \
+            ${{ env.IMAGE_NAME_CORE }} \
+            tail -f /dev/null
+          docker ps -a
+          docker logs ${{ env.IMAGE_NAME_CORE }}
+
+      # burger-warのソースリストの確認(コンテナ側)
+      - name: Source Package List(Container)
+        run: |
+          docker exec -u developer -t ${{ env.IMAGE_NAME_CORE }} bash -l -c "ls -la /home/developer/catkin_ws/src/*"
+        
+      # ロボコンプロジェクトのビルド
+      - name: Build Robot Programs
+        run: |
+          docker exec -u developer -t ${{ env.IMAGE_NAME_CORE }} bash -l -c "catkin build"
 
       # burger-warのテスト(LEVEL 3)
       - name: Test Docker Image LEVEL3
@@ -212,6 +280,39 @@ jobs:
           path: /home/runner/work/burger_war_dev/burger_war_dev/catkin_ws/logs/test_logs.tgz
           retention-days: 90
 
+      # burger-warコンテナ停止&削除
+      - name: Close Docker Container
+        run: |
+          docker stop $(docker ps -q) && docker rm $(docker ps -a -q)
+        
+      # burger-warコンテナ起動
+      - name: Launch Docker Container
+        run: |
+          docker run \
+            --name ${{ env.IMAGE_NAME_CORE }} \
+            -d \
+            --privileged \
+            --net host \
+            --mount type=bind,src=${{ env.WORKSPACE_DIR }},dst=/home/developer/catkin_ws \
+            --device /dev/snd \
+            -v /dev/shm \
+            -e DISPLAY=${{ env.DISPLAY }} \
+            -e HOST_USER_ID=$(id -u) \
+            -e HOST_GROUP_ID=$(id -g) \
+            ${{ env.IMAGE_NAME_CORE }} \
+            tail -f /dev/null
+          docker ps -a
+          docker logs ${{ env.IMAGE_NAME_CORE }}
+
+      # burger-warのソースリストの確認(コンテナ側)
+      - name: Source Package List(Container)
+        run: |
+          docker exec -u developer -t ${{ env.IMAGE_NAME_CORE }} bash -l -c "ls -la /home/developer/catkin_ws/src/*"
+        
+      # ロボコンプロジェクトのビルド
+      - name: Build Robot Programs
+        run: |
+          docker exec -u developer -t ${{ env.IMAGE_NAME_CORE }} bash -l -c "catkin build"
 
       # burger-warのテスト(LEVEL 4=Gasuta)
       - name: Test Docker Image LEVEL4 Gasuta
@@ -225,7 +326,7 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ env.TEST_LOG_ARCHIVE }}_LEVEL3
+          name: ${{ env.TEST_LOG_ARCHIVE }}_LEVEL4
           path: /home/runner/work/burger_war_dev/burger_war_dev/catkin_ws/logs/test_logs.tgz
           retention-days: 90
 
