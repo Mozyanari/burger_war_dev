@@ -55,7 +55,7 @@ jobs:
       - name: Checkout Kit Repository
         uses: actions/checkout@v2
         with:
-          repository: p-robotics-hub/burger_war_kit
+          repository: Mozyanari/burger_war_kit
           path: catkin_ws/src/burger_war_kit
 
       # burger_war_devのチェックアウト
@@ -64,19 +64,19 @@ jobs:
       #   with:
       #     path: catkin_ws/src/burger_war_dev
 
-      # 他のチーム burger_war_devのチェックアウト
-      # - name: Checkout Dev Repository
-      #   uses: actions/checkout@v2
-      #   with:
-      #     repository: EndoNrak/burger_war_dev
-      #     path: catkin_ws/src/burger_war_dev
+      他のチーム burger_war_devのチェックアウト
+      - name: Checkout Dev Repository
+        uses: actions/checkout@v2
+        with:
+          repository: EndoNrak/burger_war_dev
+          path: catkin_ws/src/burger_war_dev
 
       # Gasuta burger_war_devのチェックアウト
       - name: Checkout Gasuta Repository
         uses: actions/checkout@v2
         with:
           repository: Gasuta722/burger_war_dev
-          path: catkin_ws/src/burger_war_dev
+          path: catkin_ws/tmp/burger_war_dev_Gasuta
       
       # Mozyanari burger_war_devのチェックアウト
       - name: Checkout Mozyanari Repository
@@ -84,6 +84,8 @@ jobs:
         with:
           repository: Mozyanari/burger_war_dev
           path: catkin_ws/tmp/burger_war_dev_Mozyanari
+
+      # 
       
       # # 追加ライブラリのチェックアウト
       # - name: Checkout Library Repository
