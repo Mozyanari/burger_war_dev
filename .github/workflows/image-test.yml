@@ -65,18 +65,18 @@ jobs:
       #     path: catkin_ws/src/burger_war_dev
 
       # 他のチーム burger_war_devのチェックアウト
-      - name: Checkout Dev Repository
-        uses: actions/checkout@v2
-        with:
-          repository: EndoNrak/burger_war_dev
-          path: catkin_ws/src/burger_war_dev
+      # - name: Checkout Dev Repository
+      #   uses: actions/checkout@v2
+      #   with:
+      #     repository: EndoNrak/burger_war_dev
+      #     path: catkin_ws/src/burger_war_dev
 
       # Gasuta burger_war_devのチェックアウト
       - name: Checkout Gasuta Repository
         uses: actions/checkout@v2
         with:
           repository: Gasuta722/burger_war_dev
-          path: catkin_ws/tmp/burger_war_dev_Gasuta
+          path: catkin_ws/src/burger_war_dev
       
       # Mozyanari burger_war_devのチェックアウト
       - name: Checkout Mozyanari Repository
@@ -97,6 +97,8 @@ jobs:
         run: |
           echo "catkin_ws/src ======================================================"
           ls -la ${{ env.WORKSPACE_DIR }}/src/*
+          echo "catkin_ws/tmp ======================================================"
+          ls -la ${{ env.WORKSPACE_DIR }}/tmp/*
           echo "${GITHUB_WORKSPACE} ======================================================"
           ls -la ${GITHUB_WORKSPACE}
 
@@ -223,7 +225,7 @@ jobs:
       - name: Delete log
         run: |
           docker exec -u developer -t ${{ env.IMAGE_NAME_CORE }} bash -l -c "rm -f ${HOME}/.ros/log/* && rm -f ${HOME}/.gazebo/log/* && rm -f ${HOME}/catkin_ws/src/burger_war_kit/judge/log/*"
-          
+
       # ghcr.ioにログイン
       - name: Login to ghrc.io
         if: steps.image-test.outputs.test_result == 0 && github.event.inputs.release_enable == 'yes'
