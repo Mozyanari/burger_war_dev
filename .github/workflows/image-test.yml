@@ -49,6 +49,7 @@ jobs:
         run: |
           mkdir -p -v ${{ env.WORKSPACE_DIR }}/logs
           mkdir -p -v ${{ env.WORKSPACE_DIR }}/src
+          mkdir -p -v ${{ env.WORKSPACE_DIR }}/tmp
 
       # burger_war_kitのチェックアウト
       - name: Checkout Kit Repository
@@ -63,13 +64,26 @@ jobs:
       #   with:
       #     path: catkin_ws/src/burger_war_dev
 
-      # Gasuta burger_war_devのチェックアウト
+      # 他のチーム burger_war_devのチェックアウト
       - name: Checkout Dev Repository
         uses: actions/checkout@v2
         with:
           repository: EndoNrak/burger_war_dev
           path: catkin_ws/src/burger_war_dev
 
+      # Gasuta burger_war_devのチェックアウト
+      - name: Checkout Gasuta Repository
+        uses: actions/checkout@v2
+        with:
+          repository: Gasuta722/burger_war_dev
+          path: catkin_ws/tmp/burger_war_dev_Gasuta
+      
+      # Mozyanari burger_war_devのチェックアウト
+      - name: Checkout Mozyanari Repository
+        uses: actions/checkout@v2
+        with:
+          repository: Mozyanari/burger_war_dev
+          path: catkin_ws/tmp/burger_war_dev_Mozyanari
       
       # # 追加ライブラリのチェックアウト
       # - name: Checkout Library Repository
@@ -162,6 +176,12 @@ jobs:
           path: /home/runner/work/burger_war_dev/burger_war_dev/catkin_ws/logs/test_logs.tgz
           retention-days: 90
 
+      # ログを削除
+      - name: Delete log
+        run: |
+          docker exec -u developer -t ${{ env.IMAGE_NAME_CORE }} bash -l -c "rm -f ${HOME}/.ros/log/* && rm -f ${HOME}/.gazebo/log/* && rm -f ${HOME}/catkin_ws/src/burger_war_kit/judge/log/*"
+
+
       # burger-warのテスト(LEVEL 2)
       - name: Test Docker Image LEVEL2
         id: image-test-2
@@ -178,6 +198,11 @@ jobs:
           path: /home/runner/work/burger_war_dev/burger_war_dev/catkin_ws/logs/test_logs.tgz
           retention-days: 90
       
+      # ログを削除
+      - name: Delete log
+        run: |
+          docker exec -u developer -t ${{ env.IMAGE_NAME_CORE }} bash -l -c "rm -f ${HOME}/.ros/log/* && rm -f ${HOME}/.gazebo/log/* && rm -f ${HOME}/catkin_ws/src/burger_war_kit/judge/log/*"
+
       # burger-warのテスト(LEVEL 3)
       - name: Test Docker Image LEVEL3
         id: image-test-3
@@ -194,6 +219,11 @@ jobs:
           path: /home/runner/work/burger_war_dev/burger_war_dev/catkin_ws/logs/test_logs.tgz
           retention-days: 90
 
+      # ログを削除
+      - name: Delete log
+        run: |
+          docker exec -u developer -t ${{ env.IMAGE_NAME_CORE }} bash -l -c "rm -f ${HOME}/.ros/log/* && rm -f ${HOME}/.gazebo/log/* && rm -f ${HOME}/catkin_ws/src/burger_war_kit/judge/log/*"
+          
       # ghcr.ioにログイン
       - name: Login to ghrc.io
         if: steps.image-test.outputs.test_result == 0 && github.event.inputs.release_enable == 'yes'
