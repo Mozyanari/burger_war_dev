@@ -47,8 +47,8 @@ jobs:
       # ディレクトリの準備
       - name: Create Workspace
         run: |
-          mkdir -p ${{ env.WORKSPACE_DIR }}/logs
-          mkdir -p ${{ env.WORKSPACE_DIR }}/src
+          mkdir -p -v ${{ env.WORKSPACE_DIR }}/logs
+          mkdir -p -v ${{ env.WORKSPACE_DIR }}/src
 
       # burger_war_kitのチェックアウト
       - name: Checkout Kit Repository
@@ -58,11 +58,19 @@ jobs:
           path: catkin_ws/src/burger_war_kit
 
       # burger_war_devのチェックアウト
+      # - name: Checkout Dev Repository
+      #   uses: actions/checkout@v2
+      #   with:
+      #     path: catkin_ws/src/burger_war_dev
+
+      # Gasuta burger_war_devのチェックアウト
       - name: Checkout Dev Repository
         uses: actions/checkout@v2
         with:
+          repository: Gasuta722/burger_war_dev
           path: catkin_ws/src/burger_war_dev
 
+      
       # # 追加ライブラリのチェックアウト
       # - name: Checkout Library Repository
       #   uses: actions/checkout@v2
