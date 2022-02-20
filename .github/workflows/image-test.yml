@@ -64,7 +64,7 @@ jobs:
       #   with:
       #     path: catkin_ws/src/burger_war_dev
 
-      他のチーム burger_war_devのチェックアウト
+      # 他のチーム burger_war_devのチェックアウト
       - name: Checkout Dev Repository
         uses: actions/checkout@v2
         with:
